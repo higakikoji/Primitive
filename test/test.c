@@ -1,21 +1,23 @@
 #include <stdlib.h>
-#include "p_get_files.h"
 #include "p_printf.h"
 #include "p_scanf.h"
+#include "p_create_directory.h"
+#include "p_get_files.h"
+#include "p_process_start.h"
 
-static void test_p_printf(void) {
+static void test_p_printf(int argc, char *argv[]) {
   return;
 }
 
-static void test_p_scanf(void) {
+static void test_p_scanf(int argc, char *argv[]) {
   return;
 }
 
-static void test_p_create_directory(void) {
+static void test_p_create_directory(int argc, char *argv[]) {
   return;
 }
 
-static void test_p_get_files(void) {
+static void test_p_get_files(int argc, char *argv[]) {
   const char *path = "C:\\users\\pakkun\\data";
   const char *extension = "csv";
   int count = p_get_file_count(path, extension, 1);
@@ -51,11 +53,13 @@ static void test_p_get_files(void) {
   return;
 }
 
-static void test_p_create_process(void) {
+static void test_p_create_process(int argc, char *argv[]) {
+  int ret = p_process_start(NULL, "notepad.exe");
+  p_printf(NULL, "ret: %d\n", ret);
   return;
 }
 
-static void (*functions[])(void) = {
+static void (*functions[])(int argc, char *argv[]) = {
   test_p_printf,
   test_p_scanf,
   test_p_create_directory,
@@ -64,7 +68,7 @@ static void (*functions[])(void) = {
 };
 
 int main(int argc, char *argv[]) {
-  int func_count = sizeof(functions) / sizeof(void (*)(void));
+  int func_count = sizeof(functions) / sizeof(void (*)(int, char**));
   int num;
   do {
     p_printf(NULL,
@@ -78,7 +82,7 @@ int main(int argc, char *argv[]) {
     p_scanf(NULL, "%d", &num);
     p_printf(NULL, "=> %d\n", num);
     if ((num > 0) && (num <= func_count)) {
-      functions[num]();
+      functions[num - 1](argc, argv);
     }
   } while (num > 0);
   return 0;

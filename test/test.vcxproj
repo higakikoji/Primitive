@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="p_create_directory.c" />
+    <ClCompile Include="p_process_start.c" />
     <ClCompile Include="p_get_files.c" />
     <ClCompile Include="p_printf.c" />
     <ClCompile Include="p_scanf.c" />
@@ -140,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p_create_directory.h" />
+    <ClInclude Include="p_process_start.h" />
     <ClInclude Include="p_get_files.h" />
     <ClInclude Include="p_printf.h" />
     <ClInclude Include="p_scanf.h" />
