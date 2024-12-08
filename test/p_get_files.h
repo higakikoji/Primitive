@@ -14,6 +14,6 @@ int p_get_file_counta(const char *path, const char *search_extension, unsigned c
 
 int p_get_file_countw(const wchar_t *path, const wchar_t *search_extension, unsigned char sub_directory);
 
-int p_get_filesa(const char *path, const char *search_extension, unsigned char sub_directory, int *index, char *files[]);
+int p_get_filesa(const char *path, const char *search_extension, unsigned char sub_directory, char *files[], const size_t buffer_count);
 
-int p_get_filesw(const wchar_t *path, const wchar_t *search_extension, unsigned char sub_directory, int *index, wchar_t *files[]);
+int p_get_filesw(const wchar_t *path, const wchar_t *search_extension, unsigned char sub_directory, wchar_t *files[], const size_t buffer_count);
