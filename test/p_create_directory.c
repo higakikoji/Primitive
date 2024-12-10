@@ -1,4 +1,4 @@
-#include <shlobj_core.h>
+#include <shlobj.h>
 #include "p_create_directory.h"
 
 int p_create_directorya(const char *const path) {
