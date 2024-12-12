@@ -1,3 +1,4 @@
+#include <windows.h>
 #include <stdlib.h>
 #include "p_printf.h"
 #include "p_scanf.h"
@@ -5,19 +6,19 @@
 #include "p_get_files.h"
 #include "p_process_start.h"
 
-static void test_p_printf(int argc, char *argv[]) {
+static void test_p_printf(int argc, char *argv[], char *envp[]) {
   return;
 }
 
-static void test_p_scanf(int argc, char *argv[]) {
+static void test_p_scanf(int argc, char *argv[], char *envp[]) {
   return;
 }
 
-static void test_p_create_directory(int argc, char *argv[]) {
+static void test_p_create_directory(int argc, char *argv[], char *envp[]) {
   return;
 }
 
-static void test_p_get_files(int argc, char *argv[]) {
+static void test_p_get_files(int argc, char *argv[], char *envp[]) {
   const char *path = "C:\\users\\pakkun\\data";
   const char *extension = "csv";
   int count = p_get_file_count(path, extension, 1);
@@ -53,13 +54,13 @@ static void test_p_get_files(int argc, char *argv[]) {
   return;
 }
 
-static void test_p_create_process(int argc, char *argv[]) {
-  int ret = p_process_start(NULL, "notepad.exe");
+static void test_p_create_process(int argc, char *argv[], char *envp[]) {
+  int ret = p_process_start(NULL, "notepad.exe", 0);
   p_printf(NULL, "ret: %d\n", ret);
   return;
 }
 
-static void (*functions[])(int argc, char *argv[]) = {
+static void (*functions[])(int argc, char *argv[], char *envp[]) = {
   test_p_printf,
   test_p_scanf,
   test_p_create_directory,
@@ -67,8 +68,12 @@ static void (*functions[])(int argc, char *argv[]) = {
   test_p_create_process
 };
 
-int main(int argc, char *argv[]) {
-  int func_count = sizeof(functions) / sizeof(void (*)(int, char**));
+#if defined(_CONSOLE)
+int main(int argc, char *argv[], char *envp[]) {
+#else
+int WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev_instance, _In_ LPSTR cmd_line, _In_ int show_cmd) {
+#endif
+  int func_count = sizeof(functions) / sizeof(void (*)(int, char**, char**));
   int num;
   do {
     p_printf(NULL,
@@ -82,7 +87,11 @@ int main(int argc, char *argv[]) {
     p_scanf(NULL, "%d", &num);
     p_printf(NULL, "=> %d\n", num);
     if ((num > 0) && (num <= func_count)) {
-      functions[num - 1](argc, argv);
+#if defined(_CONSOLE)
+      functions[num - 1](argc, argv, envp);
+#else
+      functions[num - 1](__argc, __argv, NULL);
+#endif
     }
   } while (num > 0);
   return 0;
