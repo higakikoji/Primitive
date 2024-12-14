@@ -140,6 +140,7 @@
     <ClCompile Include="test.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="p_compress.h" />
     <ClInclude Include="p_create_directory.h" />
     <ClInclude Include="p_process_start.h" />
     <ClInclude Include="p_get_files.h" />
