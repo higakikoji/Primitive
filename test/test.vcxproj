@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="p_create_directory.c" />
+    <ClCompile Include="p_decompress.c" />
     <ClCompile Include="p_process_start.c" />
     <ClCompile Include="p_get_files.c" />
     <ClCompile Include="p_printf.c" />
@@ -142,11 +143,13 @@
   <ItemGroup>
     <ClInclude Include="p_compress.h" />
     <ClInclude Include="p_create_directory.h" />
+    <ClInclude Include="p_decompress.h" />
     <ClInclude Include="p_process_start.h" />
     <ClInclude Include="p_get_files.h" />
     <ClInclude Include="p_printf.h" />
     <ClInclude Include="p_scanf.h" />
     <ClInclude Include="p_sprintf.h" />
+    <ClInclude Include="p_strlen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
