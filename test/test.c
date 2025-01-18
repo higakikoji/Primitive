@@ -7,6 +7,7 @@
 #include "p_create_directory.h"
 #include "p_get_files.h"
 #include "p_process_start.h"
+#include "p_format_message.h"
 
 #define P_UT_FUNCTION_NAME_INDEX (5)
 #define P_UT_P_PRINTFA_TEST_STR ("abcdefghijklmnopqrstuvwxyz")
@@ -123,12 +124,30 @@ static void test_p_create_process(int argc, TCHAR *argv[], TCHAR *envp[]) {
   return;
 }
 
+static void test_p_compress(int argc, TCHAR *argv[], TCHAR *envp[]) {
+  return;
+}
+
+static void test_p_decompress(int argc, TCHAR *argv[], TCHAR *envp[]) {
+  return;
+}
+
+static void test_p_format_message(int argc, TCHAR *argv[], TCHAR *envp[]) {
+  TCHAR a[MAX_PATH];
+  p_get_error_string(GetLastError(), a, MAX_PATH);
+  p_printf(NULL, a);
+  return;
+}
+
 static void (*functions[])(int argc, TCHAR *argv[], TCHAR *envp[]) = {
   test_p_printf,
   test_p_scanf,
   test_p_create_directory,
   test_p_get_files,
-  test_p_create_process
+  test_p_create_process,
+  test_p_compress,
+  test_p_decompress,
+  test_p_format_message
 };
 
 #if defined(_CONSOLE)
@@ -147,6 +166,7 @@ int _tWinMain(HINSTANCE instance, HINSTANCE prev_instance, LPTSTR cmd_line, int 
       "[5] p_create_process\n"
       "[6] p_compress\n"
       "[7] p_decompress\n"
+      "[8] p_format_message\n"
       "[0] Exit\n");
     p_printf(NULL, "Command: ");
     p_scanf(NULL, "%d", &num);
